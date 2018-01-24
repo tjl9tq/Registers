@@ -15,8 +15,24 @@ for x in lines:
 #split each line by ' '
 for x in lines:
     split = x.split()
-    ifStatement = 'dict[split[4]]' + split[5] + split[6] #create a string with if statement and evaluate and perform arithmetic
-    if eval(ifStatement):
+    assert (split[1] == 'inc' or split[1] == 'dec'), "Problem with instruction."
+    assert (float(split[2]).is_integer()), "Problem with instruction."
+    assert (split[3] == 'if'), "Problem with instruction."
+    assert (split[5] == '>' or split[5] == '<' or split[5] == '>=' or split[5] == '<=' or split[5] == '=='or split[5] =='!='), "Problem with instruction."
+    assert (float(split[6]).is_integer()), "Problem with instruction."
+    if split[5] == '>':
+        check = dict[split[4]] > int(split[6])
+    if split[5] == '<':
+        check = dict[split[4]] < int(split[6])
+    if split[5] == '>=':
+        check = dict[split[4]] >= int(split[6])
+    if split[5] == '<=':
+        check = dict[split[4]] <= int(split[6])
+    if split[5] == '==':
+        check = dict[split[4]] == int(split[6])
+    if split[5] == '!=':
+        check = dict[split[4]] != int(split[6])
+    if check:
         if split[1] == 'inc':
             dict[split[0]] += int(split[2])
             if dict[split[0]] > maxVal:  # check if the new value is greater than the saved max value and update if it is
